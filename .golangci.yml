@@ -21,7 +21,7 @@ linters:
     - dupl
     - gosec
     - revive
-    - exportloopref
+    - copyloopvar
     - nolintlint
 
 linters-settings:
