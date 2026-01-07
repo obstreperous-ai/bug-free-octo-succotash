@@ -1,0 +1,89 @@
+version: '3'
+
+vars:
+  APP_NAME: bug-free-octo-succotash
+  VERSION:
+    sh: git describe --tags --always --dirty 2>/dev/null || echo "0.1.0"
+  GIT_COMMIT:
+    sh: git rev-parse --short HEAD 2>/dev/null || echo "unknown"
+  BUILD_DATE:
+    sh: date -u +"%Y-%m-%dT%H:%M:%SZ"
+  BINARY_NAME: "{{.APP_NAME}}"
+  LDFLAGS: -ldflags "-X main.Version={{.VERSION}} -X main.GitCommit={{.GIT_COMMIT}} -X main.BuildDate={{.BUILD_DATE}}"
+
+tasks:
+  default:
+    desc: "Show available tasks"
+    cmds:
+      - task --list
+
+  build:
+    desc: "Build the application with version information"
+    cmds:
+      - go build {{.LDFLAGS}} -o {{.BINARY_NAME}} .
+    generates:
+      - "{{.BINARY_NAME}}"
+
+  run:
+    desc: "Run the application"
+    deps: [build]
+    cmds:
+      - ./{{.BINARY_NAME}}
+
+  version:
+    desc: "Display version information"
+    deps: [build]
+    cmds:
+      - ./{{.BINARY_NAME}} --version
+
+  clean:
+    desc: "Clean build artifacts"
+    cmds:
+      - rm -f {{.BINARY_NAME}}
+
+  test:
+    desc: "Run tests"
+    cmds:
+      - go test -v ./...
+
+  fmt:
+    desc: "Format Go code"
+    cmds:
+      - go fmt ./...
+
+  vet:
+    desc: "Run go vet"
+    cmds:
+      - go vet ./...
+
+  lint:
+    desc: "Run linters (fmt and vet)"
+    cmds:
+      - task: fmt
+      - task: vet
+
+  install:
+    desc: "Install the application to $GOPATH/bin"
+    cmds:
+      - go install {{.LDFLAGS}} .
+
+  tag:
+    desc: "Create a new git tag (usage: task tag VERSION=v0.2.0)"
+    cmds:
+      - |
+        if [ -z "{{.VERSION}}" ]; then
+          echo "Usage: task tag VERSION=v0.2.0"
+          exit 1
+        fi
+        git tag -a {{.VERSION}} -m "Release {{.VERSION}}"
+        echo "Created tag {{.VERSION}}"
+        echo "Push with: git push origin {{.VERSION}}"
+
+  release:
+    desc: "Build a release version"
+    cmds:
+      - task: lint
+      - task: test
+      - task: build
+      - echo "Release build completed successfully"
+      - ./{{.BINARY_NAME}} --version
