@@ -31,8 +31,8 @@ go.work.sum
 # .idea/
 # .vscode/
 
-# Binary output
-cliutil
+# Binary output (only in root directory)
+/cliutil
 
 # Task temp files
 .task/
