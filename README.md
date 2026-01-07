@@ -4,7 +4,7 @@ An experimental command line utility for Linux in Go driven by CoPilot
 ## Installation
 
 ### Prerequisites
-- Go 1.16 or later
+- Go 1.24 or later
 - [Task](https://taskfile.dev/) (optional, for using the Taskfile)
 
 ### Building from Source
@@ -48,7 +48,7 @@ This project uses [Task](https://taskfile.dev/) for build automation.
 - `task vet` - Run go vet
 - `task lint` - Run all linters (fmt and vet)
 - `task install` - Install to $GOPATH/bin
-- `task tag VERSION=v0.2.0` - Create a new git tag
+- `task tag TAG_VERSION=v0.2.0` - Create a new git tag
 - `task release` - Build a release version (runs lint, test, and build)
 
 ### Version Management

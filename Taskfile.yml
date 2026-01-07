@@ -68,16 +68,16 @@ tasks:
       - go install {{.LDFLAGS}} .
 
   tag:
-    desc: "Create a new git tag (usage: task tag VERSION=v0.2.0)"
+    desc: "Create a new git tag (usage: task tag TAG_VERSION=v0.2.0)"
     cmds:
       - |
-        if [ -z "{{.VERSION}}" ]; then
-          echo "Usage: task tag VERSION=v0.2.0"
+        if [ -z "{{.TAG_VERSION}}" ]; then
+          echo "Usage: task tag TAG_VERSION=v0.2.0"
           exit 1
         fi
-        git tag -a {{.VERSION}} -m "Release {{.VERSION}}"
-        echo "Created tag {{.VERSION}}"
-        echo "Push with: git push origin {{.VERSION}}"
+        git tag -a {{.TAG_VERSION}} -m "Release {{.TAG_VERSION}}"
+        echo "Created tag {{.TAG_VERSION}}"
+        echo "Push with: git push origin {{.TAG_VERSION}}"
 
   release:
     desc: "Build a release version"
