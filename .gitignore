@@ -30,3 +30,12 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+# Binary output
+cliutil
+
+# Task temp files
+.task/
+
+# Test cache
+.cache/
