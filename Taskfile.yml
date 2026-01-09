@@ -112,7 +112,7 @@ tasks:
       - task: build
 
   tag:
-    desc: Create a new git tag (usage: task tag TAG_VERSION=v0.2.0)
+    desc: "Create a new git tag (usage: task tag TAG_VERSION=v0.2.0)"
     cmds:
       - |
         if [ -z "{{.TAG_VERSION}}" ]; then
