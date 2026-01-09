@@ -25,6 +25,6 @@ func GetConfigDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	configDir := filepath.Join(home, ".config", "cliutil")
+	configDir := filepath.Join(home, ".config", "succotash")
 	return configDir, nil
 }
