@@ -9,7 +9,7 @@ An experimental command line utility for Linux written in Go and driven by GitHu
 
 ## Features
 
-- 🚀 Fast and efficient command line interface
+- 🚀 Fast and efficient command line interface built with Cobra
 - 🧪 Test-driven development with high code coverage
 - 🔒 Security-focused with CodeQL analysis
 - 📦 Easy to build and install
@@ -29,7 +29,7 @@ git clone https://github.com/obstreperous-ai/bug-free-octo-succotash.git
 cd bug-free-octo-succotash
 task build
 # Or without Task:
-go build -o cliutil .
+go build -o bug-free-octo-succotash .
 ```
 
 ### Using Go Install
@@ -42,16 +42,16 @@ go install github.com/obstreperous-ai/bug-free-octo-succotash@latest
 
 ```bash
 # Run the CLI utility
-./cliutil
+./bug-free-octo-succotash
 
 # Show help
-./cliutil --help
+./bug-free-octo-succotash --help
 
 # Show version information
-./cliutil version
+./bug-free-octo-succotash version
 
 # Enable verbose output
-./cliutil --verbose
+./bug-free-octo-succotash --verbose
 ```
 
 ## Development
@@ -85,7 +85,7 @@ The project includes a devcontainer configuration for VS Code and GitHub Codespa
 task build
 
 # Using Go directly
-go build -o cliutil .
+go build -o bug-free-octo-succotash .
 ```
 
 ### Testing
@@ -121,7 +121,7 @@ task vet
 
 Run `task` or `task --list` to see all available tasks:
 
-- `build` - Build the application
+- `build` - Build the application with version information
 - `test` - Run tests
 - `test-coverage` - Run tests with coverage report
 - `lint` - Run linters
@@ -130,9 +130,21 @@ Run `task` or `task --list` to see all available tasks:
 - `tidy` - Tidy dependencies
 - `clean` - Clean build artifacts
 - `run` - Run the application
+- `version` - Display version information
 - `check` - Run all checks
 - `ci` - Run CI checks
 - `install` - Install to $GOPATH/bin
+- `tag` - Create a new git tag (usage: `task tag TAG_VERSION=v0.2.0`)
+- `release` - Build a release version (runs lint, test, and build)
+
+### Version Management
+
+The application version is automatically determined from git tags and commit information:
+- Version from `git describe --tags` or defaults to `0.1.0`
+- Git commit SHA from `git rev-parse --short HEAD`
+- Build timestamp in ISO 8601 format
+
+These values are injected at build time using Go's `-ldflags`.
 
 ## Project Structure
 

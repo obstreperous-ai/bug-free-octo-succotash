@@ -1,9 +1,10 @@
 version: '3'
 
 vars:
-  BINARY_NAME: cliutil
+  APP_NAME: bug-free-octo-succotash
+  BINARY_NAME: "{{.APP_NAME}}"
   VERSION:
-    sh: git describe --tags --always --dirty 2>/dev/null || echo "dev"
+    sh: git describe --tags --always --dirty 2>/dev/null || echo "0.1.0"
   BUILD_DATE:
     sh: date -u +"%Y-%m-%dT%H:%M:%SZ"
   GIT_COMMIT:
@@ -17,7 +18,7 @@ tasks:
       - task --list
 
   build:
-    desc: Build the application
+    desc: Build the application with version information
     cmds:
       - go build {{.LDFLAGS}} -o {{.BINARY_NAME}} .
     sources:
@@ -87,6 +88,12 @@ tasks:
     cmds:
       - go run {{.LDFLAGS}} . {{.CLI_ARGS}}
 
+  version:
+    desc: Display version information
+    deps: [build]
+    cmds:
+      - ./{{.BINARY_NAME}} version
+
   check:
     desc: Run all checks (fmt, vet, lint, test)
     cmds:
@@ -103,3 +110,24 @@ tasks:
       - task: lint
       - task: test
       - task: build
+
+  tag:
+    desc: Create a new git tag (usage: task tag TAG_VERSION=v0.2.0)
+    cmds:
+      - |
+        if [ -z "{{.TAG_VERSION}}" ]; then
+          echo "Usage: task tag TAG_VERSION=v0.2.0"
+          exit 1
+        fi
+        git tag -a {{.TAG_VERSION}} -m "Release {{.TAG_VERSION}}"
+        echo "Created tag {{.TAG_VERSION}}"
+        echo "Push with: git push origin {{.TAG_VERSION}}"
+
+  release:
+    desc: Build a release version (runs lint, test, and build)
+    cmds:
+      - task: lint
+      - task: test
+      - task: build
+      - echo "Release build completed successfully"
+      - ./{{.BINARY_NAME}} version
