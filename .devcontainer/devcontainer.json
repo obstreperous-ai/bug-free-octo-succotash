@@ -1,0 +1,45 @@
+{
+  "name": "Go CLI Development",
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true,
+      "username": "vscode"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github",
+        "task.vscode-task",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "go.useLanguageServer": true,
+        "go.toolsManagement.autoUpdate": true,
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "workspace",
+        "go.formatTool": "goimports",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "go.testFlags": ["-v"],
+        "go.coverOnSave": true,
+        "go.coverageDecorator": {
+          "type": "gutter"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest && go install golang.org/x/tools/cmd/goimports@latest && go install github.com/go-task/task/v3/cmd/task@latest",
+  "remoteUser": "vscode",
+  "forwardPorts": [],
+  "portsAttributes": {}
+}
