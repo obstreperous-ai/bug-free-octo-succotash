@@ -25,7 +25,7 @@ func TestGetConfigDir(t *testing.T) {
 	}
 
 	home, _ := os.UserHomeDir()
-	expected := filepath.Join(home, ".config", "cliutil")
+	expected := filepath.Join(home, ".config", "succotash")
 
 	if dir != expected {
 		t.Errorf("GetConfigDir() = %v, want %v", dir, expected)

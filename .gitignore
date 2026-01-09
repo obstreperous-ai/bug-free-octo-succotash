@@ -9,7 +9,7 @@
 *.dylib
 
 # Built binary
-bug-free-octo-succotash
+succotash
 
 # Test binary, built with `go test -c`
 *.test

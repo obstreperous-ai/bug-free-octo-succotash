@@ -29,7 +29,7 @@ git clone https://github.com/obstreperous-ai/bug-free-octo-succotash.git
 cd bug-free-octo-succotash
 task build
 # Or without Task:
-go build -o bug-free-octo-succotash .
+go build -o succotash .
 ```
 
 ### Using Go Install
@@ -42,16 +42,16 @@ go install github.com/obstreperous-ai/bug-free-octo-succotash@latest
 
 ```bash
 # Run the CLI utility
-./bug-free-octo-succotash
+./succotash
 
 # Show help
-./bug-free-octo-succotash --help
+./succotash --help
 
 # Show version information
-./bug-free-octo-succotash version
+./succotash version
 
 # Enable verbose output
-./bug-free-octo-succotash --verbose
+./succotash --verbose
 ```
 
 ## Development
@@ -85,7 +85,7 @@ The project includes a devcontainer configuration for VS Code and GitHub Codespa
 task build
 
 # Using Go directly
-go build -o bug-free-octo-succotash .
+go build -o succotash .
 ```
 
 ### Testing
