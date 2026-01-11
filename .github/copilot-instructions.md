@@ -136,6 +136,28 @@ func WithVerbose(v bool) Option {
 }
 ```
 
+## Running Tests
+
+The project uses `task test` to run all tests. This is also included in the GitHub Actions workflow.
+
+### Test Commands
+- `task test` - Run all tests with race detection and coverage
+- `task test-coverage` - Run tests and generate HTML coverage report
+- `go test -v ./internal/config` - Run tests for a specific package
+- `go test -v -race -coverprofile=coverage.out ./...` - Run tests manually with all options
+
+### Test Requirements
+- Tests must pass before committing
+- Tests are run automatically in GitHub Actions CI
+- The project requires Go 1.22 or higher
+- GitHub Actions tests on Go 1.22 and 1.23
+
+### Writing Tests
+- Follow TDD approach: write tests before implementing functionality
+- Use table-driven tests with `t.Run()` for subtests
+- Test both success and failure paths
+- Keep tests in `*_test.go` files next to the code they test
+
 ## Before Committing
 - Run `task fmt` to format code
 - Run `task lint` to check for issues
