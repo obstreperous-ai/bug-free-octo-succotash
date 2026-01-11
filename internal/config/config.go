@@ -1,3 +1,5 @@
+// Package config provides configuration management for the succotash application.
+// It handles reading and writing configuration files and provides default values.
 package config
 
 import (

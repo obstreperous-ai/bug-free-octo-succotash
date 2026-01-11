@@ -1,3 +1,5 @@
+// Package version provides version information for the application.
+// The version variables are set at build time using ldflags.
 package version
 
 var (

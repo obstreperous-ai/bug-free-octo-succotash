@@ -1,3 +1,5 @@
+// Package cliutil provides the command-line interface for the succotash application.
+// It implements the CLI commands using the Cobra framework.
 package cliutil
 
 import (
@@ -14,7 +16,7 @@ var rootCmd = &cobra.Command{
 	Long: `succotash is a command line utility for Linux.
 Built with Go and designed for extensibility.`,
 	Version: version.Version,
-	Run: func(cmd *cobra.Command, args []string) {
+	Run: func(_ *cobra.Command, _ []string) {
 		fmt.Println("Welcome to succotash! Use --help to see available commands.")
 	},
 }
