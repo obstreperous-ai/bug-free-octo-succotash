@@ -59,9 +59,17 @@ func TestFunctionName(t *testing.T) {
 
 ### Documentation
 - Write clear godoc comments for all exported functions, types, and packages
-- Package comments should describe the purpose of the package
+- **Package comments are required**: Every package must have a package-level comment describing its purpose
+- Package comments should be placed before the package declaration in the main file of the package
+- Package comments should start with "Package <name>" followed by a description
 - Use complete sentences starting with the name of the element
-- Example:
+- Example package comment:
+  ```go
+  // Package config provides configuration management for the application.
+  // It handles reading and writing configuration files and provides default values.
+  package config
+  ```
+- Example function comment:
   ```go
   // ProcessData processes the input data and returns the result.
   // It returns an error if the data is invalid.
@@ -138,14 +146,25 @@ func WithVerbose(v bool) Option {
 
 ## Before Committing
 - Run `task fmt` to format code
-- Run `task lint` to check for issues
+- Run `task lint` to check for issues (must pass with zero warnings/errors)
 - Run `task test` to ensure all tests pass
 - Run `task check` to run all checks
+- Ensure all packages have package-level documentation
 - Ensure no security vulnerabilities
+- Verify code passes all golangci-lint checks including revive rules
+
+## Code Quality Standards
+- All code must pass golangci-lint without warnings or errors
+- Package-level documentation is mandatory for all packages
+- Follow all revive linter rules (package-comments, exported, etc.)
+- Avoid boolean literals in expressions (use `if value` instead of `if value == true`)
+- Rename or use underscore for unused function parameters
+- Maintain test coverage above 80%
 
 ## When Generating Code
 1. Write the test first (TDD)
 2. Implement the minimal code to pass the test
 3. Refactor for clarity and maintainability
-4. Add documentation
-5. Run all checks
+4. Add documentation (including package-level comments)
+5. Run all checks (fmt, vet, lint, test)
+6. Fix any linter warnings or errors before committing
