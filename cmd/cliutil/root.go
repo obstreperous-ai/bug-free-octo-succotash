@@ -9,13 +9,13 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "bug-free-octo-succotash",
+	Use:   "succotash",
 	Short: "A command line utility for Linux",
-	Long: `bug-free-octo-succotash is a command line utility for Linux.
+	Long: `succotash is a command line utility for Linux.
 Built with Go and designed for extensibility.`,
 	Version: version.Version,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Welcome to bug-free-octo-succotash! Use --help to see available commands.")
+		fmt.Println("Welcome to succotash! Use --help to see available commands.")
 	},
 }
 
