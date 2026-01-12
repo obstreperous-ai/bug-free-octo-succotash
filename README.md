@@ -17,7 +17,7 @@ An experimental command line utility for Linux written in Go and driven by GitHu
 
 ## Prerequisites
 
-- Go 1.22 or higher
+- Go 1.24 or higher
 - [Task](https://taskfile.dev/) (optional, for using the Taskfile)
 
 ## Installation
@@ -64,7 +64,7 @@ This project is optimized for development in GitHub Codespaces. Simply open the 
 
 #### Local Development
 
-1. Install Go 1.22 or higher
+1. Install Go 1.24 or higher
 2. Install Task: `go install github.com/go-task/task/v3/cmd/task@latest`
 3. Install golangci-lint: `go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest`
 4. Clone the repository and run `go mod download`
