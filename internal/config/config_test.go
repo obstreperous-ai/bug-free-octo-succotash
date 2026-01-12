@@ -9,7 +9,7 @@ import (
 func TestNew(t *testing.T) {
 	cfg := New()
 
-	if cfg.Verbose != false {
+	if cfg.Verbose {
 		t.Errorf("Expected Verbose to be false, got %v", cfg.Verbose)
 	}
 
